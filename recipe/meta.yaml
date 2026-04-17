@@ -1,5 +1,5 @@
 {% set name = "unicorn-fy" %}
-{% set version = "0.12.2" %}
+{% set version = "0.17.1" %}
 
 
 package:
@@ -7,24 +7,28 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/unicorn-fy-{{ version }}.tar.gz
-  sha256: da7008b097af40f298c6787032a91150bdbed7d1260a7ea1d21b1eb810d99fd0
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/unicorn_fy-{{ version }}.tar.gz
+  sha256: 5de8f40580651169a27ebe598f2ebce91ac78147a4c5eeda3448c23bde404275
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
+  build:
+    - {{ compiler('c') }}
   host:
+    - python
     - pip
-    - python >=3.6
-    - requests
-    - ujson
+    - setuptools
+    - wheel
+    - cython
+    - mypy
   run:
-    - python >=3.6
+    - python
+    - cython
+    - orjson
     - requests
-    - ujson
 
 test:
   imports:
@@ -35,14 +39,17 @@ test:
     - pip
 
 about:
-  home: https://www.lucit.tech/unicorn-fy.html
-  summary: Convert received raw data from crypto exchange API endpoints into well-formed python dictionaries.
+  home: https://github.com/oliver-zehentleitner/unicorn-fy
+  summary: Normalizes raw responses from crypto exchange APIs into consistent Python dictionaries.
   description: |
-    Convert received raw data from crypto exchange API endpoints into well-formed python dictionaries.
+    UnicornFy normalizes raw responses from crypto exchange APIs (Binance & co.)
+    into consistent, cleanly-typed Python dictionaries. A transformation layer
+    that makes exchange data interchangeable instead of exchange-specific.
+    Part of the UNICORN Binance Suite.
   license: MIT
   license_file: LICENSE
-  dev_url: https://github.com/LUCIT-Systems-and-Development/unicorn-fy
-  doc_url: https://unicorn-fy.docs.lucit.tech/
+  dev_url: https://github.com/oliver-zehentleitner/unicorn-fy
+  doc_url: https://oliver-zehentleitner.github.io/unicorn-fy
 
 extra:
   recipe-maintainers:
