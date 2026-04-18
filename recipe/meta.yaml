@@ -1,5 +1,5 @@
 {% set name = "unicorn-fy" %}
-{% set version = "0.17.1" %}
+{% set version = "0.17.2" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/unicorn_fy-{{ version }}.tar.gz
-  sha256: 5de8f40580651169a27ebe598f2ebce91ac78147a4c5eeda3448c23bde404275
+  sha256: f29bba031dcd4c1678b50a8e6fcc8e5a1a3b6ac746305c85c35f5f0bb4918905
 
 build:
   number: 1
